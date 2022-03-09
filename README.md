@@ -7,4 +7,5 @@ full test coverage
 ##api
 ```
 const map = new IterableWeakMap();
+map.set
 ```

@@ -48,13 +48,26 @@ describe('test api', () => {
   it('delete', () => {
     const map = new IterableWeakMap()
     const o1 = {a:1}
-    const ref1 = map.set(o1, 1);
+    map.set(o1, 1);
     const o2 = {a:2}
     const ref2 = map.set(o2, 2);
     expect(map.size).to.equal(2);
     map.delete(o1) // del by value
     expect(map.size).to.equal(1);
     map.delete(ref2) // del by value ref
+    expect(map.size).to.equal(0);
+  });
+  it('has', () => {
+    const map = new IterableWeakMap()
+    const o1 = {a:1}
+    map.set(o1, 1)
+    const o2 = {a:2}
+    const ref2 = map.set(o2, 2); // return ref
+    expect(map.has(o1)).to.equal(true);
+    map.delete(o1) // del by value
+    expect(map.has(o1)).to.equal(false);
+    expect(map.size).to.equal(1);
+    map.delete(o2) // del by value ref
     expect(map.size).to.equal(0);
   });
 
